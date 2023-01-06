@@ -1,0 +1,124 @@
+
+create table department_data 
+( 
+dept_id int,
+dept_name string, 
+manager_id int,
+salary int
+) 
+row format delimited 
+fields terminated by ',';
+
+#Note:
+#Here defaualt is new line character
+#row format delimited '\t'
+
+
+desc formatted table_name;
+#Note : By using this command we detrmine that table in managed or external
+#table locations in warehouse
+
+
+
+# For data load from local
+load data local inpath 'file:///tmp/hive_class/depart_data.csv' into table department_data;
+
+
+#For data load from hdfs
+load data inpath '/tmp/hive_data_class_2/' into table department_data_from_hdfs;
+
+
+# Display column name
+set hive.cli.print.header = true;
+
+
+
+#external Table
+
+create external table
+hiveclass.department_data_external                                                                                          
+( 
+dept_id int,
+dept_name string,
+manager_id int,
+salary int 
+)
+row format delimited fields terminated by ',' 
+location '/tmp/department.csv'; 
+
+#Note:
+
+#Here you can check the location by using
+#desc formatted table_name;
+
+
+
+
+
+# work with Array data types
+
+create table employee
+(
+id int,
+name string,
+skills array<string> 
+)
+row format delimited
+fields terminated by ','
+collection items terminated by ':';
+
+
+# Get element by index in hive array data type
+
+select id, name, skills[0] as prime_skill from employee;
+
+select                                                                                                                                  
+id,                                                                                                                                     
+name,                                                                                                                                   
+size(skills) as size_of_each_array,                                                                                                     
+array_contains(skills,"HADOOP") as knows_hadoop,                                                                                        
+sort_array(skills) as sorted_array                                                                                                                     
+from employee; 
+
+
+
+
+
+#Table Map in data type
+
+create table employee_map_data
+(
+id int,
+name string,
+details map<string,string>
+) 
+row format delimited 
+fields terminated by ','
+collection items terminated by '|' 
+map keys terminated by ':';
+
+
+    
+
+
+
+select                                                                                                                                  
+id,                                                                                                                                     
+name,                                                                                                                                   
+details["gender"] as employee_gender                                                                                                    
+from employee_map_data; 
+
+
+
+
+
+select                                                                                                                                  
+id,                                                                                                                                     
+name,                                                                                                                                   
+details,                                                                                                                                
+size(details) as size_of_each_map,                                                                                                      
+map_keys(details) as distinct_map_keys,                                                                                                 
+map_values(details) as distinct_map_values                                                                                              
+from employee_map_data;
+limit 1
+
