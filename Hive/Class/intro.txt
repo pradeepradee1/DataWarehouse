@@ -35,8 +35,7 @@ set hive.cli.print.header = true;
 
 #external Table
 
-create external table
-hiveclass.department_data_external                                                                                          
+create external table hiveclass.department_data_external           
 ( 
 dept_id int,
 dept_name string,
@@ -72,12 +71,12 @@ collection items terminated by ':';
 
 select id, name, skills[0] as prime_skill from employee;
 
-select                                                                                                                                  
-id,                                                                                                                                     
-name,                                                                                                                                   
-size(skills) as size_of_each_array,                                                                                                     
-array_contains(skills,"HADOOP") as knows_hadoop,                                                                                        
-sort_array(skills) as sorted_array                                                                                                                     
+select 
+id,
+name,
+size(skills) as size_of_each_array,
+array_contains(skills,"HADOOP") as knows_hadoop,
+sort_array(skills) as sorted_array                 
 from employee; 
 
 
@@ -102,23 +101,20 @@ map keys terminated by ':';
 
 
 
-select                                                                                                                                  
-id,                                                                                                                                     
-name,                                                                                                                                   
-details["gender"] as employee_gender                                                                                                    
-from employee_map_data; 
+select                     
+id,                   
+name,
+details["gender"] as employee_gender  
+from employee_map_data;
 
 
-
-
-
-select                                                                                                                                  
-id,                                                                                                                                     
-name,                                                                                                                                   
-details,                                                                                                                                
-size(details) as size_of_each_map,                                                                                                      
-map_keys(details) as distinct_map_keys,                                                                                                 
-map_values(details) as distinct_map_values                                                                                              
+select    
+id,                  
+name,                
+details,
+size(details) as size_of_each_map,
+map_keys(details) as distinct_map_keys,
+map_values(details) as distinct_map_values 
 from employee_map_data;
 limit 1
 
