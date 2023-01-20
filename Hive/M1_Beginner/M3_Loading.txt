@@ -1,0 +1,18 @@
+# Loading Into Table
+
+
+# For data load from local
+load data local inpath 'file:///tmp/hive_class/depart_data.csv' into table department_data;
+
+
+# For data load from hdfs
+load data inpath '/tmp/hive_data_class_2/' into table department_data_from_hdfs;
+
+
+
+# Display column name
+set hive.cli.print.header = true;
+
+
+# We will see the map and reduce details
+select count(*) from tablename;  

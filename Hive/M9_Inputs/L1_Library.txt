@@ -1,0 +1,10 @@
+# download hive catalog jar file , if serde libraries are not imported
+
+#Note : Use Maven Through download jar file
+
+
+#Download
+https://repo1.maven.org/maven2/org/apache/hive/hcatalog/hive-hcatalog-core/0.14.0/
+
+#Importing
+hive> add jar /tmp/hive_class/hive-hcatalog-core-0.14.0.jar;

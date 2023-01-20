@@ -1,0 +1,9 @@
+#ORC
+
+create table sales_order_data_orc
+(
+ORDERNUMBER int,
+QUANTITYORDERED int,
+DEALSIZE string
+)
+stored as orc;

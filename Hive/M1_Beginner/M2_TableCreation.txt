@@ -1,0 +1,68 @@
+# Table Creation
+
+#Internal Table
+
+create table department_data 
+( 
+dept_id int,
+dept_name string, 
+manager_id int,
+salary int
+) 
+row format delimited 
+fields terminated by ',';
+
+# Note:
+#		Here defaualt is new line character
+#		row format delimited '\t'
+
+
+desc formatted table_name;
+
+#Note : By using this command we detrmine the table is Internal(managed) or external
+#		we find the	table locations in warehouse
+
+
+
+#external Table
+
+create external table hiveclass.department_data_external           
+( 
+dept_id int,
+dept_name string,
+manager_id int,
+salary int 
+)
+row format delimited fields terminated by ',' 
+location '/tmp/department.csv'; 
+
+#Note:
+#		Here you can check the location by using
+#		desc formatted table_name;
+
+
+
+
+# create table as CSV SerDe
+
+create table csv_table               
+(                
+name string,           
+location string                           
+)
+row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde'     
+with serdeproperties (    
+ "separatorChar" = ",",      
+ "quoteChar" = "\"",        
+ "escapeChar" = "\\"                          
+)         
+stored as textfile
+tblproperties ("skip.header.line.count" = "1");
+
+
+#Note:
+
+# Here 	
+		separatorChar 	=	Separator the Character
+		quoteChar		=	string
+		escapeChar		=	Pradeep,kumar"De"

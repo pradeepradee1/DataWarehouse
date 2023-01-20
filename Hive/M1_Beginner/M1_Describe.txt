@@ -1,0 +1,8 @@
+
+
+#To Know The Input and Output Format file and Library Name and other stuffs by using above command
+
+desc formatted table_name;
+
+
+Library = SerDe(Serilization and Deserilization)

@@ -1,0 +1,14 @@
+# create json table
+
+create table json_table
+( 
+name string,
+id int,
+skills array<string>                                                                                         )                            
+row format serde 'org.apache.hive.hcatalog.data.JsonSerDe'
+stored as textfile; 
+
+
+
+# load data into json
+load data local inpath 'file:///tmp/hive_class/json_file.json' into table json_table;

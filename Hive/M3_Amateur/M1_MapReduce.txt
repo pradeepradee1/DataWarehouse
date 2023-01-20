@@ -1,0 +1,35 @@
+#Map - Reudce
+
+select year_id, sum(sales) as total_sales from sales_order_data_orc group by year_id; 
+
+# here only 1 map and 1 reduce task will get created
+
+
+
+In order to change the average load for a reducer (in bytes): 
+  	set hive.exec.reducers.bytes.per.reducer=<number>                                                                                           
+In order to limit the maximum number of reducers:
+ 	set hive.exec.reducers.max=<number>                                                                                                         
+In order to set a constant number of reducers:
+	 set mapreduce.job.reduces=<number> 
+
+
+
+# change number of reducers to 3
+
+set mapreduce.job.reduces=3;
+
+create table sales_order_grouped_orc_v1 stored as orc as select year_id, sum(sales) as total_sales from sales_order_data_orc group by year_id;
+
+
+# after creating the table, check the number of files in hdfs location
+
+# change number of reducers to 2
+
+set mapreduce.job.reduces=2;
+
+create table sales_order_grouped_orc_v2 stored as orc as select year_id, sum(sales) as total_sales from sales_order_data_orc group by year_id;
+
+
+# after creating the table, check the number of files in hdfs location
+
