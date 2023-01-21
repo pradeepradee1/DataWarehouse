@@ -1,0 +1,3 @@
+#Add Python File in hive Engine
+
+add file /tmp/hive_class/multiply_udf.py;

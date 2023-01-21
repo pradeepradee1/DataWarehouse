@@ -1,10 +1,9 @@
+
+
 # set this property if doing static partition
 set hive.mapred.mode=strict;
 
-
-
 # create table command for partition tables - for Static
-
 
 
 create table sales_data_static_part 
