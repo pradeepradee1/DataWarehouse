@@ -33,7 +33,8 @@ dept_name string,
 manager_id int,
 salary int 
 )
-row format delimited fields terminated by ',' 
+row format delimited 
+fields terminated by ',' 
 location '/tmp/department.csv'; 
 
 #Note:
