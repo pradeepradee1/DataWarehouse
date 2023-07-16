@@ -1,0 +1,19 @@
+#Example : partitione With bucketing
+
+create table partitioneAndbucketing
+(
+id int,
+name string,
+salary int,
+unit string
+)
+partitioned by (COUNTRY string)
+clustered by (id)
+sorted by (id)
+into 2 buckets
+row format delimited
+fields terminated by ','
+stored as textfile;
+
+
+#Note : We can also do partition and sub partition and bucketing

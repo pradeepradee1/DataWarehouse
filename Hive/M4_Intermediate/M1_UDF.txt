@@ -1,3 +1,9 @@
+#PreDefinedFunctions
+
+show functions;
+
+#UDF = User Defined Functions
+
 # add udf in hive shell
 
 add file /tmp/hive_class/multiply_udf.py;
