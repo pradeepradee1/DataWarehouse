@@ -1,10 +1,30 @@
-
-
 # set this property if doing static partition
 set hive.mapred.mode=strict;
 
-# create table command for partition tables - for Static
+#Need To Create table
 
+create table user_data_no_partition
+( 
+ORDERNUMBER int,
+QUANTITYORDERED int, 
+SALES string,
+YEAR_ID int,
+COUNTRY string
+) 
+row format delimited 
+fields terminated by ','
+lines terminated by '\n';
+stored as TEXTFILE;
+
+
+load data inpath '/tmp/hive_data_class_2/' 
+into table user_data_no_partition;
+
+
+select * from user_data_no_partition;
+
+
+#Static partition
 
 create table sales_data_static_part 
 ( 
@@ -19,9 +39,24 @@ partitioned by (COUNTRY string);
 
 # load data in static partition
 
-insert overwrite table sales_data_static_part partition(country = 'USA') 
-select ordernumber,quantityordered,sales,year_id from sales_order_data_orc where country = 'USA';
+insert into table sales_data_static_part partition(country = 'USA') 
+select ordernumber,quantityordered,sales,year_id from user_data_no_partition where country = 'USA';
 
+(or) 
+
+insert overwrite table sales_data_static_part partition(country = 'USA') 
+select ordernumber,quantityordered,sales,year_id from user_data_no_partition where country = 'USA';
+
+
+#Note : here we need to change USA in where clause and near partition part
+#Note : After executing the insert commands , Map - Reduce excution engine will run jobs
+
+
+show partitions sales_data_static_part;
+
+
+
+#Dynamic partioning
 
 # set this property for dynamic partioning
 set hive.exec.dynamic.partition.mode=nonstrict;   
@@ -42,10 +77,14 @@ partitioned by (COUNTRY string);
 # load data in dynamic partition table
 
 insert overwrite table sales_data_dynamic_part partition(country) 
-select ordernumber,quantityordered,sales,year_id,country from sales_or der_data_orc;
+select ordernumber,quantityordered,sales,year_id,country from user_data_no_partition where country = 'USA';
 
 
-# multilevel partition
+#Note : After dynamic partition we can see the result of only records in USA 
+
+
+
+#Multilevel partition
 
 create table sales_data_dynamic_multilevel_part_v1
 (

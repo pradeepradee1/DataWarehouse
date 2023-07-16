@@ -20,7 +20,7 @@ location string
 )
 row format delimited 
 fields terminated by ','; 
-    
+
 
 
 load data local inpath 'file:///tmp/hive_class/locations.csv' into table locations; 
@@ -51,3 +51,18 @@ sorted by (id)
 into 2 buckets; 
     
 insert overwrite table buck_locations select * from locations;
+
+
+#Example
+
+create table buck_users
+(
+id int,
+name string,
+salary int,
+unit string
+)
+partitioned by (COUNTRY string)
+clustered by (id)
+sorted by (id)
+into 2 buckets;

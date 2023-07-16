@@ -5,4 +5,9 @@
 desc formatted table_name;
 
 
+desc table_name;
+
+desc extended table_name;
+
+
 Library = SerDe(Serilization and Deserilization)

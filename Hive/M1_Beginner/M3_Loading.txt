@@ -1,11 +1,11 @@
 # Loading Into Table
 
-# For data load from hdfs
+# from hdfs to hive
 
 load data inpath '/tmp/hive_data_class_2/' 
 into table department_data_from_hdfs;
 
-# For data load from local
+# from local to hive
 
 load data local inpath 'file:///tmp/hive_class/depart_data.csv' 
 into table department_data;
